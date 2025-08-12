@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mysf_flutter/screens/Auth/splashscreen.dart';
+import 'package:mysf_flutter/screens/Auth/welcomescreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -6,58 +8,24 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final bool isLoggedIn = false; //Change this with LocalStorage
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       initialRoute: '/',
       routes: {
-        '/': (context) => FirstPage(),
-        '/second': (context) => SecondPage(),
+        '/': (context) => Splashscreen(),
+        '/welcome': (context) => WelcomeScreen(),
       },
-    );
-  }
-}
-
-class FirstPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-        backgroundColor: Colors.red,
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/second');
-            },
-            child: Center(
-              child: Image.asset(
-                'assets/logo/smartfren.png',
-                height: 200,
-                width: 200,
-              ),
-            ),
-          ),
-        ));
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Second Page'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('Go Back'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      onGenerateRoute: (setting) {
+        if (setting.name == 'dynamic') {
+          return MaterialPageRoute(
+              builder: (context) =>
+                  isLoggedIn ? WelcomeScreen() : WelcomeScreen());
+        }
+        return null;
+      },
     );
   }
 }
