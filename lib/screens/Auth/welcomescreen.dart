@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mysf_flutter/screens/Auth/viewmodel/welcome.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  final WelcomeScreenViewModel vModel = WelcomeScreenViewModel();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -17,11 +20,15 @@ class WelcomeScreen extends StatelessWidget {
           children: [
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () {}, child: Text("Login")),
+              child: ElevatedButton(
+                  onPressed: () => vModel.navToLogin(context),
+                  child: Text("Login")),
             ),
             SizedBox(
               width: double.infinity,
-              child: OutlinedButton(onPressed: () {}, child: Text("Register")),
+              child: OutlinedButton(
+                  onPressed: () => vModel.navToRegister(context),
+                  child: Text("Register")),
             )
           ],
         ),
