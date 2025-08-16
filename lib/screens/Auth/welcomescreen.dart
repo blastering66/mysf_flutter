@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mysf_flutter/screens/Auth/viewmodel/welcome.dart';
+import 'package:mysff_flutter/screens/Auth/viewmodel/welcome.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final WelcomeScreenViewModel vModel = WelcomeScreenViewModel();

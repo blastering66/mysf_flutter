@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mysf_flutter/screens/Auth/welcomescreen.dart';
+import 'package:mysff_flutter/screens/Auth/welcomescreen.dart';
 
 class Splashscreen extends StatefulWidget {
   @override

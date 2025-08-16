@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mysf_flutter/screens/Auth/loginscreen.dart';
-import 'package:mysf_flutter/screens/Auth/registerscreen.dart';
-import 'package:mysf_flutter/screens/Auth/splashscreen.dart';
-import 'package:mysf_flutter/screens/Auth/welcomescreen.dart';
+import 'package:mysff_flutter/screens/Auth/loginscreen.dart';
+import 'package:mysff_flutter/screens/Auth/registerscreen.dart';
+import 'package:mysff_flutter/screens/Auth/splashscreen.dart';
+import 'package:mysff_flutter/screens/Auth/welcomescreen.dart';
+import 'package:mysff_flutter/screens/Home/homescreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => WelcomeScreen(),
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
+        '/home': (context) => HomeScreen(),
       },
       onGenerateRoute: (setting) {
         if (setting.name == 'dynamic') {
