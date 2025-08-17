@@ -59,6 +59,7 @@ class AuthViewModel extends ChangeNotifier {
       prefs.remove('isLoggedIn');
       _setLoggedIn(false);
       notifyListeners();
+      print('Logged out successfully');
     } catch (e) {
       // Handle error
       print('Logout failed: $e');

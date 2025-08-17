@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mysff_flutter/screens/Auth/authchecker.dart';
 import 'package:mysff_flutter/screens/Auth/loginscreen.dart';
 import 'package:mysff_flutter/screens/Auth/registerscreen.dart';
 import 'package:mysff_flutter/screens/Auth/splashscreen.dart';
@@ -22,22 +23,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final authViewModel = context.watch<AuthViewModel>();
-    final bool isLoggedIn = authViewModel.isLoggedIn; //Change this with LocalStorage
-    print('User is logged in >: $isLoggedIn');
     return MaterialApp(
       title: 'Flutter Demo',
       initialRoute: '/',
-      routes: isLoggedIn
-          ? {
-              '/': (context) => HomeScreen(),
-              '/profile': (context) => profileScreen(),
-            }
-          : {
-              '/': (context) => Splashscreen(),
-              '/login': (context) => LoginScreen(),
-              '/register': (context) => RegisterScreen(),
-            },
+      home: Authchecker(),
       onGenerateRoute: (setting) {
         print('onGenerateRoute called with setting: ${setting.name}');
         switch (setting.name) {
@@ -51,7 +40,7 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => HomeScreen());
           default:MaterialPageRoute(
               builder: (context) =>
-                  isLoggedIn ? HomeScreen() : WelcomeScreen());
+                  Splashscreen());
         }
         
       },

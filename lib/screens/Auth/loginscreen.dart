@@ -51,7 +51,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Handle login logic here
                   final email = emailController.text;
                   final password = passwordController.text;
-                  authViewModel.login(email, password) ;
+                  authViewModel.login(email, password).then((_) {
+                    if (authViewModel.isLoggedIn) {
+                      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Login failed')),
+                      );
+                    }
+                  });
                   print('Email/Phone: $email, Password: $password');
                 },
                 child: Text('Login'),

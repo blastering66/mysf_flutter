@@ -41,6 +41,8 @@ class _MoreTabState extends State<MoreTabScreen> {
                   SnackBar(content: Text('You just logged out!')),
                 );
                 // moreViewModel.doLogout(context);
+                 final authViewModel = Provider.of<AuthViewModel>(context, listen: false);
+    authViewModel.logout();
               },
               child: Text('Logout'),
             ),
