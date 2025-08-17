@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:mysff_flutter/services/auth_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthViewModel extends ChangeNotifier {
@@ -34,14 +35,19 @@ class AuthViewModel extends ChangeNotifier {
     _setLoading(true);
     try {
       // await _authService.login(email, password);
-      if (email == 'abc' && password == '123') {
+      String? token = await AuthService.login(email, password);
+      print('Token >> $token');
+      if (token != null) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
+        await prefs.setString('session_id', token);
       } else {
         throw Exception('Invalid credentials');
       }
       _setLoggedIn(true);
       notifyListeners();
+    
+      
     } catch (e) {
       // Handle error
       print('Login failed: $e');
