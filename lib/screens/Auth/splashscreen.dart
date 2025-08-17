@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mysff_flutter/screens/Auth/components/logo.dart';
 import 'package:mysff_flutter/screens/Auth/welcomescreen.dart';
-
+import 'package:mysff_flutter/screens/Home/homescreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Splashscreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Splashscreen();
@@ -16,15 +18,25 @@ class _Splashscreen extends State<Splashscreen> {
         (Route<dynamic> route) => false);
   }
 
+    void goToHome() {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+        (Route<dynamic> route) => false);
+  }
+
   void refreshToken() async {
     setState(() {
       isLoading = true;
     });
-    await Future.delayed(Duration(seconds: 3));
-    setState(() {
-      isLoading = false;
-    });
-    goToWelcome();
+    final sPref =  await SharedPreferences.getInstance();
+    // goToWelcome();
+    if (sPref.getBool('isLoggedIn') ?? false) {
+      goToHome();  
+    } else {
+      goToWelcome();
+    }
+    
   }
 
   @override
@@ -48,10 +60,9 @@ class _Splashscreen extends State<Splashscreen> {
           Container(
               width: 200,
               height: 200,
-              child: Image.asset(
-                'assets/logo/smartfren.png',
-                height: 200,
+              child: Logo(
                 width: 200,
+                height: 200,
               )),
           SizedBox(
             width: 50,

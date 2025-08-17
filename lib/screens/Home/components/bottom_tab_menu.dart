@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mysff_flutter/screens/Home/hometabscreen.dart';
+import 'package:mysff_flutter/screens/Home/moretabscreen.dart';
+import 'package:mysff_flutter/screens/Home/packagetabscreen.dart';
 
 class BottomTabMenu extends StatefulWidget {
   const BottomTabMenu({Key? key}) : super(key: key);
@@ -11,9 +14,15 @@ class _BottomTabMenuState extends State<BottomTabMenu> {
   int _selectedIndex = 0;
 
   static const List<Widget> _pages = <Widget>[
-    Center(child: Text('Home')),
-    Center(child: Text('Search')),
-    Center(child: Text('Profile')),
+    HomeTabScreen(
+      key: Key('home_tab'),
+    ),
+    PackageTabScreen(
+      key: Key('package_tab'),
+    ),
+    MoreTabScreen(
+      key: Key('more_tab'),
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -34,15 +43,23 @@ class _BottomTabMenuState extends State<BottomTabMenu> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',
+            label: 'Packages',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'More',
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.search),
+          //   label: 'Lifestyle',
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.person),
+          //   label: 'More',
+          // ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.black,
         onTap: _onItemTapped,
       ),
     );

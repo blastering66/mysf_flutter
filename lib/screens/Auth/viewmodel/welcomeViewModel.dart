@@ -9,6 +9,10 @@ class WelcomeScreenViewModel {
     Navigator.pushNamed(context, '/register');
   }
 
+  void navToHome(BuildContext context) {
+    Navigator.pushNamed(context, '/home');
+  }
+
   void navBack(BuildContext context) {
     Navigator.pop(context);
   }
