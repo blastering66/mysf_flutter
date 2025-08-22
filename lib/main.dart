@@ -9,8 +9,10 @@ import 'package:mysff_flutter/screens/Auth/welcomescreen.dart';
 import 'package:mysff_flutter/screens/Home/homescreen.dart';
 import 'package:mysff_flutter/screens/More/profilescreen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
+  // debugPaintSizeEnabled = true;
   runApp(
     ChangeNotifierProvider(
       create: (context) => AuthViewModel(),
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget {
               builder: (context) =>
                   Splashscreen());
           case '/login':
+            return MaterialPageRoute(builder: (context) => LoginScreen());
+          case '/register':  
             return MaterialPageRoute(builder: (context) => LoginScreen());
           case '/home':
             return MaterialPageRoute(builder: (context) => HomeScreen());

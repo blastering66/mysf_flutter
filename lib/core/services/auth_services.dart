@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:mysff_flutter/services/endpoints.dart';
+import 'package:mysff_flutter/core/types/api_response.dart';
+import 'package:mysff_flutter/core/types/user.dart';
+import 'package:mysff_flutter/core/services/endpoints.dart';
 
 class AuthService {
   static const String baseUrl = 'https://custinfo.smartfren.com/assembly/sfpas/registry/v4'; // Replace with your API base URL
 
-  static Future<String?> login(String email, String password) async {
+  static Future<User?> login(String email, String password) async {
     final url = Uri.parse(Endpoint.login.url(baseUrl));
-    final response = await http.post(
+    final responseLogin = await http.post(
       url,
       headers: {
         'Content-Type': 'application/json',
@@ -20,17 +22,18 @@ class AuthService {
       body: json.encode({'email': email, 'password': password}),
     );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      print('Login successful: $data');
-      print('Login status: ${data['status']}');
-      if (data?['status'] == 0) {
-        return data['data']['result']['session_id'] ?? ''; // Assuming the API returns a session_id
+    if (responseLogin.statusCode == 200) {
+      final data = json.decode(responseLogin.body);
+      final response = ApiResponse.fromJson(data);
+      if (response.status == 0) {
+        // String sessionId =  data['data']['result']['session_id'] ?? '';
+        // String refreshToken =  data['data']['result']['refresh_token'] ?? '';
+        return response.user; // Assuming the API returns a session_id
       } else {
         throw Exception('Login failed: ${data['message']}');
       }
     } else {
-      throw Exception('Failed to login: ${response.body}');
+      throw Exception('Failed to login ABC');
     }
   }
 
