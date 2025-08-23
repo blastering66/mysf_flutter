@@ -23,14 +23,14 @@ class AuthService {
     );
 
     if (responseLogin.statusCode == 200) {
-      final data = json.decode(responseLogin.body);
-      final response = ApiResponse.fromJson(data);
+      final body = json.decode(responseLogin.body);
+      final response = ApiResponse.fromJson(body);
       if (response.status == 0) {
         // String sessionId =  data['data']['result']['session_id'] ?? '';
         // String refreshToken =  data['data']['result']['refresh_token'] ?? '';
         return response.user; // Assuming the API returns a session_id
       } else {
-        throw Exception('Login failed: ${data['message']}');
+        throw Exception('Login failed: ${response.message}');
       }
     } else {
       throw Exception('Failed to login ABC');

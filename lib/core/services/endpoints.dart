@@ -2,6 +2,7 @@ enum Endpoint {
   refreshToken("/refreshtoken"),
   login("/signin/email"),
   profile("/profile"),
+  getSubinfoDetail("/getSubinfoDetailRev"),
   register("/register"),
   products("/products");
 

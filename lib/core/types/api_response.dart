@@ -3,12 +3,12 @@ import 'package:mysff_flutter/core/types/user.dart';
 class ApiResponse {
   final int status;
   final String message;
-  final User user;
+  final User? user;
 
   ApiResponse({
     required this.status,
     required this.message,
-    required this.user,
+    this.user,
   });
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) {

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:mysff_flutter/core/types/user.dart';
 import 'package:mysff_flutter/core/services/auth_services.dart';
+import 'package:mysff_flutter/screens/Home/viewmodel/user_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthViewModel extends ChangeNotifier {
@@ -14,7 +15,9 @@ class AuthViewModel extends ChangeNotifier {
   bool _isLoggedIn = false;
   bool get isLoggedIn => _isLoggedIn;
 
-  AuthViewModel () {
+  final UserViewModel userViewModel;
+
+  AuthViewModel (this.userViewModel) {
     // Initialize any necessary services here
     // _authService.initialize();
     // _userService.initialize();
@@ -38,11 +41,12 @@ class AuthViewModel extends ChangeNotifier {
       // await _authService.login(email, password);
       User? response = await AuthService.login(email, password);
       // print('Token >> $token');
-      if (response?.sessionId != null) {
+      if (response != null && response?.sessionId != null) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         await prefs.setString('session_id',  response?.sessionId ?? '');
         await prefs.setString('refresh_token',  response?.refresh_token ?? '');
+        userViewModel.setCurrentUser(response);
       } else {
         throw Exception('Invalid credentials');
       }
@@ -64,7 +68,7 @@ class AuthViewModel extends ChangeNotifier {
     try {
       // await _authService.logout();
       final prefs = await SharedPreferences.getInstance();
-      prefs.remove('isLoggedIn');
+      prefs.clear();
       _setLoggedIn(false);
       notifyListeners();
       print('Logged out successfully');
